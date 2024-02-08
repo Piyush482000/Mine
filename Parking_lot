@@ -1,0 +1,56 @@
+class ParkingLot:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.available_spaces = capacity
+        self.occupied_spaces = {}
+
+    def park_vehicle(self, vehicle_number):
+        if self.available_spaces > 0:
+            self.available_spaces -= 1
+            self.occupied_spaces[vehicle_number] = True
+            print(f"Vehicle {vehicle_number} parked successfully.")
+        else:
+            print("Parking lot is full.")
+
+    def retrieve_vehicle(self, vehicle_number):
+        if vehicle_number in self.occupied_spaces:
+            del self.occupied_spaces[vehicle_number]
+            self.available_spaces += 1
+            print(f"Vehicle {vehicle_number} retrieved successfully.")
+        else:
+            print(f"Vehicle {vehicle_number} not found in the parking lot.")
+
+    def display_available_spaces(self):
+        print(f"Available parking spaces: {self.available_spaces}")
+
+
+def main():
+    parking_lot_capacity = 10  # Example capacity of the parking lot
+    parking_lot = ParkingLot(parking_lot_capacity)
+
+    while True:
+        print("\nParking Management System:")
+        print("1. Park Vehicle")
+        print("2. Retrieve Vehicle")
+        print("3. Display Available Parking Spaces")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            vehicle_number = input("Enter vehicle number: ")
+            parking_lot.park_vehicle(vehicle_number)
+        elif choice == "2":
+            vehicle_number = input("Enter vehicle number: ")
+            parking_lot.retrieve_vehicle(vehicle_number)
+        elif choice == "3":
+            parking_lot.display_available_spaces()
+        elif choice == "4":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
